@@ -51,7 +51,9 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        $existingType = Type::where('name', Str::lower($request->name))->first();
+        $existingType = Type::where('name', Str::lower($request->name))
+                    ->where('user_id', $request->user_id)
+                    ->first();
 
         if ($existingType) {
             return redirect()->route('type.create')->with('error', 'Já existe uma categoria com nome: ' . $request->name);
@@ -65,6 +67,7 @@ class TypeController extends Controller
         $type->save();
 
         return redirect()->route('type.create')->with('success', 'Categoria cadastrada com sucesso!');
+
     }
 
     /**
