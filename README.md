@@ -36,7 +36,7 @@
 Clone o projeto para o seu ambiente local.
 
    ```bash
-   git clone https://seurepositorio.com/minhas-financas.git
+   git clone https://github.com/deamble/minhas-financas.git
    ```
 
 Navegue até o diretório do projeto e execute a instalação do Composer.
