@@ -11,8 +11,12 @@
                 <div class="p-6 text-gray-900">
 
                     @if (session('success'))
-                        <div class="bg-green-500 text-white p-4 rounded">
+                        <div class="bg-green-300 text-green-800 p-4 rounded">
                             {{ session('success') }}
+                        </div>
+                    @elseif (session('error'))
+                        <div class="bg-yellow-300 text-yellow-800 p-4 rounded">
+                            {{ session('error') }}
                         </div>
                     @endif
 
@@ -20,31 +24,39 @@
                         @csrf
                         @method('PUT')
 
-                        <fieldset class="border-2 rounded p-6">
-                            <legend>Preencha todos os campos</legend>
+                        <fieldset class="border-2 rounded p-6 border border-blue-800">
+                            <legend class="text-blue-800">Atualização da categoria <b>"{{ $type->name }}"</b></legend>
 
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
-                            <div class="p-4 rounded overflow-hidden mb-4">
-                                <label for="name">Nome</label>
-                                <input type="text" name="name" id="name" value="{{ $type->name }}" class="w-full rounded" required autofocus>
+
+                            <div class="flex justify-around">
+                                <div class="w-1/2">
+                                    <div class="max-w-sm p-6 bg-amber-400 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                                        <label for="level" class="block text-sm font-medium text-white text-center mb-2"><i class="fa-solid fa-triangle-exclamation"></i> Informações para atualização.</label>
+
+                                        <p class="mb-3 text-sm font-medium text-white">
+                                            Após atualizar os dados, todos os registros vinculados a categoria editada serão afetados.
+
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="w-1/2">
+                                    <label for="level" class="block text-sm font-medium text-blue-600 text-center"><i class="fa-solid fa-layer-group"></i> Dados para atualização</label>
+                                    <p class="p-2"><i class="fa-solid fa-list"></i> Nome<input type="text" name="name" id="name" value="{{ $type->name }}" class="rounded-lg w-full" required></p>
+                                    <p class="p-2"><i class="fa-regular fa-message"></i> Descrição<input type="text" name="description" id="description" value="{{ $type->description }}" class="rounded-lg w-full"></p>
+                                </div>
                             </div>
 
-                            <div class="p-4 rounded overflow-hidden mb-4">
-                                <label for="description">Descrição</label>
-                                <input type="text" name="description" id="description" value="{{ $type->description }}" class="w-full rounded">
-                            </div>
-
-                            <div class="p-4 rounded overflow-hidden">
-                                <button type="submit" class="bg-emerald-500 text-white rounded p-2 focus:outline-none">
-                                    <i class="fa-solid fa-floppy-disk"></i> Atualizar
+                            <div class="p-2 rounded overflow-hidden flex items-center justify-center">
+                                <button type="submit" class="bg-emerald-500 border border-emerald-600 text-white rounded p-1 px-3 mr-2 focus:outline-none">
+                                    Atualizar
                                 </button>
-                                <button type="submit" class="bg-red-500 text-white rounded p-2 focus:outline-none">
-                                    <i class="fa-solid fa-ban"></i> Cancelar
-                                    <a href="{{ route('type.byuser', Auth::user()->id) }}" class="text-white">Cancelar</a>
-                                </button>
+                                <a href="{{ route('type.byuser', Auth::user()->id) }}" class="bg-red-500 border border-red-600 text-white rounded p-1 px-3 mr-2 focus:outline-none">
+                                    Cancelar
+                                </a>
                             </div>
-
                         </fieldset>
                     </form>
                 </div>

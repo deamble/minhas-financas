@@ -31,7 +31,13 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $user->update(['level' => $request->input('level')]);
+        $user->update(
+            [
+                'level' => $request->input('level'),
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+            ]
+        );
 
         return redirect()->route('user.index');
     }

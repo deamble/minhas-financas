@@ -16,7 +16,7 @@ class FinanceController extends Controller
     {
         $allEntries = Finance::entries()->where('user_id', Auth::user()->id)->sum('value_transaction');
         $allExpenses = Finance::expenses()->where('user_id', Auth::user()->id)->sum('value_transaction');
-        $allFinances = Finance::where('user_id', Auth::user()->id)->get();
+        $allFinances = Finance::where('user_id', Auth::user()->id)->paginate(20);
 
         $total = $allEntries - $allExpenses;
 

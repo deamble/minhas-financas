@@ -26,25 +26,24 @@
                         <tbody>
                             @foreach ($users as $user)
                                 <tr class="text-center border-b-2 border-white">
-
                                     @if ($user->level == 'admin')
                                         <td class="px-4 py-3 border border-white">
                                             {{-- <i class="fa-solid fa-user-gear text-orange-500"></i> --}}
                                             <span class="bg-orange-500 text-white me-2 px-3 py-1 rounded-full dark:bg-orange-500 dark:text-white">Administrador</span>
                                         </td>
-                                        <td class="text-orange-500 px-4 py-3 border border-white">{{ $user->name }}</td>
-                                        <td class="text-orange-500 px-4 py-3 border border-white">{{ $user->email }}</td>
-                                        <td class="text-orange-500 px-4 py-3 border border-white">{{ $user->updated_at }}</td>
-                                        <td class="text-orange-500 px-4 py-3 border border-white">{{ $user->updated_at }}</td>
+                                        <td class="text-orange-500 px-4 py-3 border border-white"><b>{{ $user->name }}</b></td>
+                                        <td class="text-orange-500 px-4 py-3 border border-white"><b>{{ $user->email }}</b></td>
+                                        <td class="text-orange-500 px-4 py-3 border border-white"><b>{{ $user->updated_at }}</b></td>
+                                        <td class="text-orange-500 px-4 py-3 border border-white"><b>{{ $user->updated_at }}</b></td>
                                     @else
                                         <td class="px-4 py-3 border border-white">
                                             {{-- <i class="fa-solid fa-user text-blue-500"></i> --}}
                                             <span class="bg-blue-500 text-white me-2 px-3 py-1 rounded-full dark:bg-blue-500 dark:text-white">Usuário</span>
                                         </td>
-                                        <td class="px-4 py-3 border border-white">{{ $user->name }}</td>
-                                        <td class="px-4 py-3 border border-white">{{ $user->email }}</td>
-                                        <td class="px-4 py-3 border border-white">{{ $user->created_at }}</td>
-                                        <td class="px-4 py-3 border border-white">{{ $user->updated_at }}</td>
+                                        <td class="px-4 py-3 border border-white"><b>{{ $user->name }}</b></td>
+                                        <td class="px-4 py-3 border border-white"><b>{{ $user->email }}</b></td>
+                                        <td class="px-4 py-3 border border-white"><b>{{ $user->created_at }}</b></td>
+                                        <td class="px-4 py-3 border border-white"><b>{{ $user->updated_at }}</b></td>
                                     @endif
 
                                     @can('level')

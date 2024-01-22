@@ -95,7 +95,7 @@ class TypeController extends Controller
     {
         $type->update($request->all());
 
-        return redirect()->route('type.byuser', Auth::user()->id);
+        return redirect()->route('type.byuser', Auth::user()->id)->with('success', 'Categoria atualizada com sucesso!');
     }
 
 

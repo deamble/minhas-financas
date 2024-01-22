@@ -7,14 +7,6 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if (session('delete'))
-                <div class="bg-green-300 text-green-800 p-4 rounded text-center mb-2">
-                    {{ session('delete') }}
-                </div>
-            @endif
-
-
-
             <div class="overflow-hidden sm:rounded-lg">
                 <div class="">
                     @if($types->isEmpty())
@@ -42,7 +34,7 @@
                                 <tr class="text-center border-b-2 border border-white">
                                     <th class="text-center px-4 py-3 border border-white">Nome</th>
                                     <th class="border border-white px-4 py-3 ">Descrição</th>
-                                    <th class="border border-white px-4 py-3 ">Data de criação</th>
+                                    {{-- <th class="border border-white px-4 py-3 ">Data de criação</th> --}}
                                     <th class="border border-white px-4 py-3 ">Data de atualização</th>
                                     <th class="text-center border border-white px-4 py-3">Ações</th>
                                 </tr>
@@ -53,7 +45,7 @@
                                     <tr class="text-center border-b-2 border border-white">
                                         <td class="text-center px-4 py-3 border border-white">{{ $type->name }}</td>
                                         <td class="border border-white px-4 py-3 ">{{ $type->description }}</td>
-                                        <td class="border border-white px-4 py-3 ">{{ $type->created_at }}</td>
+                                        {{-- <td class="border border-white px-4 py-3 ">{{ $type->created_at }}</td> --}}
                                         <td class="border border-white px-4 py-3 ">{{ $type->updated_at }}</td>
                                         <td class="text-center border border-white px-4 py-3 ">
                                             <a href="{{ route('type.edit', $type->id)}}" class="text-blue-400 hover:text-blue-600"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -74,4 +66,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        @if(session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+
+        @if(session('error'))
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if (session('delete'))
+            toastr.error("{{ session('delete') }}");
+        @endif
+    </script>
 </x-app-layout>

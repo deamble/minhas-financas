@@ -6,19 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-
-        @if (session('success'))
-            <div class="max-w-7xl mb-2 mx-auto sm:px-6 lg:px-8 p-2">
-                <div class="bg-green-500 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-4 text-center text-white">
-                        {{ session('success') }}
-                    </div>
-                </div>
-            </div>
-        @endif
-
         @if ($allFinances->isEmpty())
-            {{-- Cadastrar uma movimentação quando não há nenhuma --}}
             <p class="text-center text-gray-600 mb-4">Ainda não há nenhuma movimentação.</p>
             <p class="text-center text-gray-600">
                 <a href="{{ route('finance.create')}}">
@@ -29,7 +17,7 @@
                 </a>
             </p>
         @else
-        {{-- Exibe apenas se já tiver alguma movimentação cadastrada --}}
+
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
             <div class="col-span-1 col-span-1 bg-emerald-400 p-4 rounded text-green-700 border border-emerald-500 flex items-center">
                 <i class="fa-solid fa-arrow-trend-up mr-2"></i>
@@ -51,7 +39,6 @@
                     <div class="flex items-center w-full relative">
                         <input type="date" id="data_entrada" name="data_entrada" class="w-full rounded-lg border border-emerald-400 text-emerald-500 focus:border-emerald-500 focus:ring focus:ring-emerald-200 pl-8" title="Data de Entrada">
                         <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-emerald-500">
-                            <!-- Ícone de calendário do Tailwind -->
                             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"></path>
                             </svg>
@@ -61,7 +48,6 @@
                         <i class="fa-solid fa-calendar-invert text-lg mr-2 text-amber-500" title="Data de Saída"></i>
                         <input type="date" id="data_saida" name="data_saida" class="w-full rounded-lg border border-amber-400 text-amber-500 focus:border-amber-500 focus:ring focus:ring-amber-200 pl-8" title="Data de Saída">
                         <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-amber-500">
-                            <!-- Ícone de calendário do Tailwind -->
                             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"></path>
                             </svg>
@@ -85,7 +71,6 @@
                                 <td class="px-4 py-3 text-emerald-700">{{ $finance->created_at}}</td>
                                 <td class="px-4 py-3">
                                     <a href="{{ route('finance.show', $finance->id)}}" class="text-emerald-500 hover:text-emerald-700 p-1"><i class="fa-solid fa-eye"></i></a>
-                                    {{-- <a href="{{ route('finance.confirm_delete', $finance->id)}}" class="text-red-400 hover:text-red-600 p-1"><i class="fa-solid fa-trash"></i></a> --}}
                                 </td>
                             </tr>
                             @else
@@ -96,7 +81,6 @@
                                 <td class="px-4 py-3 text-amber-700">{{ $finance->created_at}}</td>
                                 <td class="px-4 py-3">
                                     <a href="{{ route('finance.show', $finance->id)}}" class="text-amber-500 hover:text-amber-700 p-1"><i class="fa-solid fa-eye"></i></a>
-                                    {{-- <a href="{{ route('finance.confirm_delete', $finance->id)}}" class="text-red-400 hover:text-red-600 p-1"><i class="fa-solid fa-trash"></i></a> --}}
                                 </td>
                             </tr>
                             @endif
@@ -109,8 +93,8 @@
             <div class="col-span-1">
                 <div class="overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="w-full text-gray-900">
-                        <div class="bg-emerald-400 hover:bg-emerald-600 text-white font-bold py-1 px-5 rounded-m flex items-center">
-                            <i class="fa-solid fa-chart-line mr-2"></i>
+                        <div class="bg-emerald-500 hover:bg-emerald-600 border text-white font-bold py-1 px-5 rounded-m flex items-center">
+                            <i class="fa-solid fa-money-bill-transfer"></i>
                             <a href="{{ route('finance.create')}}">
                                 <button>Adicionar Movimentação</button>
                             </a>
@@ -118,11 +102,25 @@
                     </div>
                 </div>
             </div>
-        </div>
 
+        </div>
         @endif
 
+        @if ($allFinances->count() >= 20 || $allFinances->currentPage() > 1)
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="p-3 bg-gray-100 rounded-lg mb-4" >
+                    {{ $allFinances->links() }}
+                </div>
+            </div>
+        @endif
 
     </div>
+
+
+    <script>
+        @if(session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+    </script>
 
 </x-app-layout>
