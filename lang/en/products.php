@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'title' => 'Products',
+    'create' => 'Create Product',
+    'edit' => 'Edit Product',
+    'name' => 'Product Name',
+    'description' => 'Description',
+    'price' => 'Price',
+    'stock' => 'Stock',
+    'sku' => 'SKU',
+    'category' => 'Category',
+    'status' => 'Status',
+    'image' => 'Product Image',
+    'actions' => 'Actions',
+    'no_image' => 'No image',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
+    'cancel' => 'Cancel',
+    'save' => 'Save',
+    'update' => 'Update',
+    'delete' => 'Delete',
+    'delete_confirm' => 'Are you sure you want to delete this product?',
+    'success_create' => 'Product created successfully.',
+    'success_update' => 'Product updated successfully.',
+    'success_delete' => 'Product deleted successfully.',
+    'add_new' => 'Add New Product',
+]; 

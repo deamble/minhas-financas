@@ -1,13 +1,11 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TypeController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\IntegrationController;
+use App\Http\Controllers\YampiWebhookController;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,30 +19,32 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 */
 
 Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect('/dashboard');
-    }
-
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resources([
-        'user' => UserController::class,
-        'type' => TypeController::class,
-        'finance' => FinanceController::class,
-        'dashboard' => DashboardController::class
-    ]);
+    // Rotas de produtos
+    Route::resource('products', ProductController::class);
 
-    Route::get('types_by_user/{id}', [TypeController::class, 'typesByUser'])->name('type.byuser');
-    Route::get('/delete_confirm/{id}', [TypeController::class, 'deleteConfirm'])->name('type.confirm_delete');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+    // Rotas de integrações
+    Route::resource('integrations', IntegrationController::class);
+    Route::post('/integrations/test', [IntegrationController::class, 'test'])->name('integrations.test');
 
-
+    // Webhook da Yampi
+    Route::post('/webhooks/yampi', [YampiWebhookController::class, 'handle'])
+        ->name('webhooks.yampi')
+        ->middleware('auth');
 });
+
+// Rota para mudança de idioma
+Route::get('language/{lang}', [LanguageController::class, 'switchLang'])->name('language.switch');
 
 require __DIR__.'/auth.php';

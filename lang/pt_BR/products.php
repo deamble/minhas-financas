@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'title' => 'Produtos',
+    'create' => 'Criar Produto',
+    'edit' => 'Editar Produto',
+    'name' => 'Nome do Produto',
+    'description' => 'Descrição',
+    'price' => 'Preço',
+    'stock' => 'Estoque',
+    'sku' => 'SKU',
+    'status' => 'Status',
+    'image' => 'Imagem do Produto',
+    'actions' => 'Ações',
+    'no_image' => 'Sem imagem',
+    'active' => 'Ativo',
+    'inactive' => 'Inativo',
+    'cancel' => 'Cancelar',
+    'save' => 'Salvar',
+    'update' => 'Atualizar',
+    'delete' => 'Excluir',
+    'delete_confirm' => 'Tem certeza que deseja excluir este produto?',
+    'success_create' => 'Produto criado com sucesso.',
+    'success_update' => 'Produto atualizado com sucesso.',
+    'success_delete' => 'Produto excluído com sucesso.',
+    'add_new' => 'Adicionar Novo Produto',
+]; 
